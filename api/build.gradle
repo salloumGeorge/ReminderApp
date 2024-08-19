@@ -18,13 +18,28 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	//Web App
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Database management
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.postgresql:postgresql:42.7.2'
+	implementation 'com.zaxxer:HikariCP'
+
+	// Observability an monitoring
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+	// Async Messaging
+	implementation 'org.springframework.kafka:spring-kafka'
 }
 
 tasks.named('test') {

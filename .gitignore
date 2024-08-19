@@ -1,0 +1,8 @@
+/logs
+/mysql_data_manager
+/mysql_data_scheduler
+/redis_data
+/kafka
+/.idea
+/db_data
+```
