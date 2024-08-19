@@ -27,3 +27,17 @@ GRANT USAGE, SELECT ON SEQUENCE public.test_table_id_seq TO "manager_user";
 
 -- Insert a row into the table
 INSERT INTO "public"."test_table" ("name") VALUES ('test_name');
+
+CREATE TABLE reminders (
+                                 id VARCHAR NOT NULL PRIMARY KEY,
+                                 event_date DATE NOT NULL,
+                                 event_time TIMESTAMPTZ,
+                                 user_time_zone VARCHAR,
+                                 target_user_email VARCHAR NOT NULL,
+                                 repeatable BOOLEAN,
+                                 frequency VARCHAR(10) CHECK (frequency IN ('DAY', 'WEEK', 'MONTH', 'YEAR')),
+                                 interval INTEGER,
+                                 created_on TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_user_email ON reminders (target_user_email);

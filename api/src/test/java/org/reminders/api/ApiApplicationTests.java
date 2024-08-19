@@ -1,4 +1,4 @@
-package org.reminders.api.api;
+package org.reminders.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
