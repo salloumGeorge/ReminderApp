@@ -19,8 +19,7 @@ public class CreateReminderController {
 
     @PostMapping
     public ResponseEntity<?> createReminder(@RequestBody ReminderApiModel request) {
-        Reminder reminder = buildReminder(request);
-        reminderManagementService.createReminder(reminder);
+        Reminder reminder = reminderManagementService.createReminder(buildReminder(request));
         try {
             return ResponseEntity.ok(mapModel(reminder));
         } catch (Exception e) {
