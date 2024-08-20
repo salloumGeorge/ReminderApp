@@ -27,3 +27,18 @@ GRANT USAGE, SELECT ON SEQUENCE public.test_table_id_seq TO "scheduler_user";
 
 -- Insert a row into the table
 INSERT INTO "public"."test_table" ("name") VALUES ('test_name');
+
+CREATE TABLE IF NOT EXISTS notifications (
+                                         Id UUID PRIMARY KEY,
+                                         next_notification_time_utc TIMESTAMP,
+                                         user_original_timestamp TIMESTAMP,
+                                         timezone VARCHAR,
+                                         targetUser VARCHAR NOT NULL,
+                                         repeatable BOOLEAN,
+                                         Frequency VARCHAR(10) CHECK (Frequency IN ('DAY', 'WEEK', 'MONTH', 'YEAR')),
+                                         Interval INTEGER
+);
+
+-- Index on `next_notification_time_utc` for optimized queries.
+CREATE INDEX reminders_next_notification_time_idx ON notifications(next_notification_time_utc);
+
