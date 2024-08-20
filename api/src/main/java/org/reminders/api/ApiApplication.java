@@ -10,10 +10,4 @@ public class ApiApplication {
 		SpringApplication.run(ApiApplication.class, args);
 	}
 
-	/*
-	* add api to create reminder
-	* add psql database and save in timezone
-	* add kafka to publish event message of created and dropped
-	* deploy 2 instances with a load balancer / reverse proxy
-	* */
 }

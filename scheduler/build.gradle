@@ -32,7 +32,7 @@ dependencies {
 
 	// Database management
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.postgresql:postgresql:42.7.2'
+	implementation 'org.postgresql:postgresql'
 	implementation 'com.zaxxer:HikariCP'
 
 	// Observability an monitoring
