@@ -1,6 +1,7 @@
 package org.reminders.api.adapters.in.rest.reminders;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.reminders.api.core.domain.Recurrence;
 import org.reminders.api.core.domain.Reminder;
 import org.reminders.api.core.domain.ReminderManagementService;
@@ -13,12 +14,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/reminders")
 @RequiredArgsConstructor
+@Slf4j
 public class CreateReminderController {
 
     private final ReminderManagementService reminderManagementService;
 
     @PostMapping
     public ResponseEntity<?> createReminder(@RequestBody ReminderApiModel request) {
+        log.info("Attempting to create reminder: " +request);
         Reminder reminder = reminderManagementService.createReminder(buildReminder(request));
         try {
             return ResponseEntity.ok(mapModel(reminder));

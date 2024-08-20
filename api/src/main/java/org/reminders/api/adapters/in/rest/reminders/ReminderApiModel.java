@@ -1,9 +1,6 @@
 package org.reminders.api.adapters.in.rest.reminders;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.reminders.api.core.domain.FrequencyEnum;
 
 import java.time.LocalDateTime;
@@ -13,6 +10,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Setter
 @AllArgsConstructor
+@ToString
 public class ReminderApiModel {
 
     private String userEmail;
