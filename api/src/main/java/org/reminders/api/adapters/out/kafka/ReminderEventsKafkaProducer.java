@@ -21,6 +21,7 @@ public class ReminderEventsKafkaProducer implements RemindersUpdatesNotifier {
     public void sendMessage(Reminder reminder) throws JsonProcessingException {
         // TODO: extract topics and events into library
         kafkaTemplate.send(REMINDERS_V_0, toStringFormat(reminder));
+        System.out.println("Sent message: " + reminder);
     }
 
     private String toStringFormat(Reminder reminder) throws JsonProcessingException {

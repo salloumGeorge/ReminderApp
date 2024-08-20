@@ -21,13 +21,13 @@ public class KafkaConsumer {
     private final NotificationScheduler scheduler;
     public static final String REMINDERS_V_0 = "reminders.v0";
 
-    @KafkaListener(topics = REMINDERS_V_0, groupId = SCHEDULERS)
+    @KafkaListener(topics = REMINDERS_V_0, groupId = SCHEDULERS, concurrency = "3" )
     public void consume(String message) {
         try {
+            System.out.println("Consumed object: " + message);
             ReminderCreatedEvent object = objectMapper.readValue(message, ReminderCreatedEvent.class);
-            System.out.println("Consumed object: " + object);
             scheduler.scheduleNotification(mapToNotification(object));
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
