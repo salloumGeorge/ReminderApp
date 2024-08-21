@@ -1,4 +1,4 @@
-package org.reminders.workers.workers;
+package org.reminders.workers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +9,4 @@ public class WorkersApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WorkersApplication.class, args);
 	}
-
-	/*
-	* Handle event.
-	* Check in cache for repeated events
-	* Setup DLQ
-	* send to email
-	* */
 }
