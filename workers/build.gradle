@@ -33,7 +33,6 @@ dependencies {
 
 	// Observability an monitoring
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

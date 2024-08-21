@@ -28,7 +28,6 @@ services:
       - ./db/scheduler_init.sql:/docker-entrypoint-initdb.d/scheduler_init.sql
     networks:
       - app-network
-  
 
   redis:
     container_name: redis_server
