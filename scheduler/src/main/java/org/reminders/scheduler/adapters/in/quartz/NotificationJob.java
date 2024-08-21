@@ -1,9 +1,15 @@
 package org.reminders.scheduler.adapters.in.quartz;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.reminders.scheduler.core.domain.NotificationExecutor;
+import org.reminders.scheduler.core.domain.NotificationScheduler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -11,17 +17,16 @@ import java.time.ZoneOffset;
 import java.util.Date;
 
 @Slf4j
+@Component
 public class NotificationJob extends QuartzJobBean {
+
+    @Autowired
+    NotificationExecutor notificationExecutor;
+
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        LocalDateTime startOfMinute = getStartOfMinute(context.getFireTime());
-        log.info("Executing Job at UTC: " + startOfMinute );
+        notificationExecutor.executeNotifications(context.getFireTime());
 
     }
 
-    private static LocalDateTime getStartOfMinute(Date fireTime) {
-        LocalDateTime fireDateTime = fireTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        LocalDateTime utcFireDateTime = fireDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
-        return utcFireDateTime.withSecond(0).withNano(0);
-    }
 }

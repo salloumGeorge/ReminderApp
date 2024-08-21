@@ -1,13 +1,16 @@
 package org.reminders.scheduler.core.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
+@AllArgsConstructor
 public class Notification {
     private UUID id;
     LocalDateTime nextNotificationUTC;
@@ -31,18 +34,19 @@ public class Notification {
         String frequency,
         int interval
     ){
-        Notification notification = new Notification();
-        notification.id = id;
-        notification.nextNotificationUTC = computeInUTC(userTimeZoneScheduledNotification, userTimeZone);
-        notification.userTimeZoneScheduledNotification = userTimeZoneScheduledNotification;
-        notification.userTimeZone = userTimeZone;
-        notification.userEmail = userEmail;
-        notification.content = content;
-        notification.repeatable = repeatable;
-        notification.frequency = frequency;
-        notification.interval = interval;
-        return notification;
+        return new Notification(
+                id,
+                computeInUTC(userTimeZoneScheduledNotification, userTimeZone),
+                userTimeZoneScheduledNotification,
+                userTimeZone,
+                userEmail,
+                content,
+                repeatable,
+                frequency,
+                interval
+        );
     }
+
 
     private static LocalDateTime computeInUTC(LocalDateTime userTimeZoneScheduledNotification, String userTimeZone) {
         ZonedDateTime zonedDateTime = ZonedDateTime.of(userTimeZoneScheduledNotification, ZoneId.of(userTimeZone));
@@ -50,6 +54,32 @@ public class Notification {
         return utc.toLocalDateTime();
     }
 
+    public Optional<LocalDateTime> computeNextScheduleUTC() {
+        if (repeatable) {
+            return switch (frequency) {
+                case "daily" -> Optional.of(nextNotificationUTC.plusDays(interval));
+                case "weekly" -> Optional.of(nextNotificationUTC.plusWeeks(interval));
+                case "monthly" -> Optional.of(nextNotificationUTC.plusMonths(interval));
+                default -> Optional.empty();
+            };
+        }
+        return Optional.empty();
+    }
+
+    public Notification generateNextNotification(LocalDateTime nextNotificationTime) {
+        Notification notification = new Notification(
+                id,
+                nextNotificationTime,
+                userTimeZoneScheduledNotification,
+                userTimeZone,
+                userEmail,
+                content,
+                repeatable,
+                frequency,
+                interval
+        );
+        return notification;
+    }
 }
 
 

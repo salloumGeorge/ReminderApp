@@ -2,7 +2,16 @@ package org.reminders.scheduler.core.ports;
 
 import org.reminders.scheduler.core.domain.Notification;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface NotificationsRepository {
 
-    public void saveNotification(Notification notification);
+    void saveNotification(Notification notification);
+
+    List<Notification> findAll(LocalDateTime utc);
+
+    void deleteNotification(Notification notification);
+
+    void updateNotificationNextNotificationTime(Notification updatedNotification);
 }
