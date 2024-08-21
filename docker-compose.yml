@@ -22,7 +22,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
       - ./db_data/scheduler:/var/lib/postgresql/data/
       - ./db/scheduler_init.sql:/docker-entrypoint-initdb.d/scheduler_init.sql
@@ -152,7 +152,7 @@ services:
       - app-network
     environment:
       - PSQL_HOST=scheduler_postgres_db
-      - PSQL_PORT=5433
+      - PSQL_PORT=5432
       - PSQL_USER=scheduler_user
       - PSQL_PASSWORD=scheduler_password
       - PSQL_SCHEMA=scheduler_schema
