@@ -31,7 +31,7 @@ dependencies {
 
 	// Observability an monitoring
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-registry-otlp:1.13.3'
 
 	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -40,6 +40,7 @@ dependencies {
 
 	// Async Messaging
 	implementation 'org.springframework.kafka:spring-kafka'
+
 }
 
 tasks.named('test') {
