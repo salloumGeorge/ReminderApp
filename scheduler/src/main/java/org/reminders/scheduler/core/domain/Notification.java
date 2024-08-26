@@ -57,9 +57,9 @@ public class Notification {
     public Optional<LocalDateTime> computeNextScheduleUTC() {
         if (repeatable) {
             return switch (frequency) {
-                case "daily" -> Optional.of(nextNotificationUTC.plusDays(interval));
-                case "weekly" -> Optional.of(nextNotificationUTC.plusWeeks(interval));
-                case "monthly" -> Optional.of(nextNotificationUTC.plusMonths(interval));
+                case "DAY" -> Optional.of(nextNotificationUTC.plusDays(interval));
+                case "WEEK" -> Optional.of(nextNotificationUTC.plusWeeks(interval));
+                case "MONTH" -> Optional.of(nextNotificationUTC.plusMonths(interval));
                 default -> Optional.empty();
             };
         }
